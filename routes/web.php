@@ -20,6 +20,8 @@ Route::get('/', function () {
     return redirect('register');
 });
 
+Route::get('/menu', [\App\Http\Controllers\MenuController::class, 'index'])->name('menu');
+
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function(){
