@@ -24,6 +24,10 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
+    <?php
+        use App\Http\Controllers\MenuController;
+        $total = MenuController::basketItem();
+    ?>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -37,8 +41,17 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto ms-3">
-                        <a href="{{ route('dashboard') }}" class="dropdown-item {{ Route::currentRouteNamed( 'dashboard' ) ?  'active' : '' }}">Dashboard</a>
                         <a href="{{ route('menu') }}" class="dropdown-item {{ Route::currentRouteNamed( 'menu' ) ?  'active' : '' }}">Menu</a>
+                        <a href="{{ route('orders') }}" class="dropdown-item {{ Route::currentRouteNamed( 'orders' ) ?  'active' : '' }}">Orders</a>
+                        @if(Route::has('login'))
+                            @auth
+                                @if (Auth::user()->usertype == "ADMIN")
+                                    <a href="{{ route('admin') }}" class="dropdown-item {{ Route::currentRouteNamed( 'admin' ) ?  'active' : '' }}">Admin</a>
+                                @endif
+                            @else
+
+                            @endif
+                        @endif
                     </ul>
 
                     <!-- Center of navbar -->
@@ -61,6 +74,10 @@
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Basket ({{ $total }})</a>
+                            </li>
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

@@ -17,13 +17,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect('register');
+    return redirect('menu');
 });
 
 Route::get('/menu', [\App\Http\Controllers\MenuController::class, 'index'])->name('menu');
+Route::get('/orders', [\App\Http\Controllers\OrdersController::class, 'index'])->name('orders');
+
+Route::post('/add_to_basket', [\App\Http\Controllers\MenuController::class, 'addToBasket'])->name('addToBasket');
 
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function(){
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin');
 });
