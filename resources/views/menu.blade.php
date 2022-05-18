@@ -105,9 +105,9 @@
                                                 <label for="{{ substr($pizza->name, 0, 1) }}PizzaSize">Pizza Size:</label>
                                                 <select name="{{ substr($pizza->name, 0, 1) }}PizzaSize" id="{{ substr($pizza->name, 0, 1) }}PizzaSize" class="form-select" aria-label="{{ $pizza->name }} pizza sizes">
                                                     <option>Pizza size</option>
-                                                    <option value="small" selected>Small</option>
-                                                    <option value="medium">Medium</option>
-                                                    <option value="large">Large</option>
+                                                    <option value="Small" selected>Small</option>
+                                                    <option value="Medium">Medium</option>
+                                                    <option value="Large">Large</option>
                                                 </select>
                                                 <input type="hidden" name="pizza_id" value="{{ $pizza->id }}">
                                                 <input type="hidden" name="pizza_name" value="{{ $pizza->name }}">
@@ -149,32 +149,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Total Section -->
-        <div class="row justify-content-center mt-3">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header text-center">{{ __('Total') }}</div>
-
-                    <div class="ms-3 mt-3">
-                        <p>Deal - None</p>
-                        <p>Pizza - £0.00</p>
-                        <p>Pizza - £0.00</p>
-                        <p>Pizza - £0.00</p>
-
-                        <label for="getOrderTypes">Collection/Delivery</label>
-                        <select id="getOrderTypes" class="form-select w-25" aria-label="Order retrieval type">
-                            <option selected>...</option>
-                            <option value="collection">Collection</option>
-                            <option value="delivery">Delivery</option>
-                        </select>
-                    </div>
-
-                    <div class="text-center mb-3 mt-3">
-                        <a href="#" class="btn btn-primary w-75">Confirm Order</a>
                     </div>
                 </div>
             </div>

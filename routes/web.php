@@ -22,8 +22,10 @@ Route::get('/', function () {
 
 Route::get('/menu', [\App\Http\Controllers\MenuController::class, 'index'])->name('menu');
 Route::get('/orders', [\App\Http\Controllers\OrdersController::class, 'index'])->name('orders');
+Route::get('/basket', [\App\Http\Controllers\MenuController::class, 'basketList'])->name('basket');
 
 Route::post('/add_to_basket', [\App\Http\Controllers\MenuController::class, 'addToBasket'])->name('addToBasket');
+Route::post('/basket/delete/{id}', [\App\Http\Controllers\MenuController::class, 'removeFromBasket'])->name('removeFromBasket');
 
 Auth::routes();
 

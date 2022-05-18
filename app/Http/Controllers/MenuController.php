@@ -52,6 +52,7 @@ class MenuController extends Controller
         $pizza->description = $request->description;
         $pizza->size = $sizeSelection;
 
+        // Sets price variables to the correct prices based on size
         switch ($request->pizza_name)
         {
             case "Create Your Own":
@@ -77,15 +78,16 @@ class MenuController extends Controller
                 break;
         }
 
+        // Identifies what size was selected and sets the Pizza object price to the correct one
         switch ($sizeSelection)
         {
-            case "small":
+            case "Small":
                 $pizza->price = $smallPrice;
                 break;
-            case "medium":
+            case "Medium":
                 $pizza->price = $mediumPrice;
                 break;
-            case "large":
+            case "Large":
                 $pizza->price = $largePrice;
                 break;
         }
@@ -97,6 +99,7 @@ class MenuController extends Controller
         $basket->pizza_price = $pizza->price;
         $basket->session_id = session()->getId();
 
+        // Save the basket object and return to the menu page
         $basket->save();
         return redirect('/');
     }
@@ -105,5 +108,34 @@ class MenuController extends Controller
     {
         $sessionID = session()->getId();
         return Basket::where('session_id', $sessionID)->count();
+    }
+
+    public function basketList()
+    {
+        $sessionID = Session::getId();
+        $pizzas = Basket::where('session_id', $sessionID)->get();
+
+        return view('basket', ['basket'=>$pizzas]);
+    }
+
+    public static function getTotalCost()
+    {
+        $sessionID = Session::getId();
+        $pizzas = Basket::where('session_id', $sessionID)->get();
+        $totalCost = 0.00;
+
+        foreach ($pizzas as $pizza)
+        {
+            $totalCost += $pizza->pizza_price;
+        }
+
+        return $totalCost;
+    }
+
+    public function removeFromBasket(Basket $basket)
+    {
+        $basket->delete();
+
+        return redirect('basket');
     }
 }

@@ -76,7 +76,7 @@
                             @endif
 
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Basket ({{ $total }})</a>
+                                <a class="nav-link" href="{{ route('basket') }}">Basket ({{ $total }})</a>
                             </li>
                         @else
                             <li class="nav-item dropdown">
