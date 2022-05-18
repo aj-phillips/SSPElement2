@@ -35,8 +35,8 @@ class MenuController extends Controller
     public function addToBasket(Request $request)
     {
         // New objects
-        $basket = new Basket();
         $pizza = new Pizza();
+        $basket = session()->get('basket');
 
         // Prices for pizza based on size
         $smallPrice = 0;
@@ -92,49 +92,77 @@ class MenuController extends Controller
                 break;
         }
 
-        // Set basket object properties
-        $basket->pizza_id = $request->pizza_id;
-        $basket->pizza_name = $request->pizza_name;
-        $basket->pizza_size = $sizeSelection;
-        $basket->pizza_price = $pizza->price;
-        $basket->session_id = session()->getId();
+        // Check if empty and add the first item
+        if (!$basket)
+        {
+            $basket = [
+                $request->pizza_id => [
+                    "pizza_id" => $request->pizza_id,
+                    "name" => $request->pizza_name,
+                    "size" => $sizeSelection,
+                    "price" => $pizza->price
+                ]
+            ];
 
-        // Save the basket object and return to the menu page
-        $basket->save();
-        return redirect('/');
+            session()->put('basket', $basket);
+        }
+
+        $basket[$request->pizza_id] = [
+            "pizza_id" => $request->pizza_id,
+            "name" => $request->pizza_name,
+            "size" => $sizeSelection,
+            "price" => $pizza->price
+        ];
+
+        session()->put('basket', $basket);
+
+        return redirect()->back()->with('success', 'Pizza successfully added to basket!');
     }
 
     public static function basketItem()
     {
-        $sessionID = session()->getId();
-        return Basket::where('session_id', $sessionID)->count();
+        $sessionBasket = session()->get('basket');
+
+        if (!$sessionBasket == null)
+        {
+            return count($sessionBasket);
+        }
+        else
+        {
+            return 0;
+        }
     }
 
     public function basketList()
     {
-        $sessionID = Session::getId();
-        $pizzas = Basket::where('session_id', $sessionID)->get();
+        $sessionBasket = session()->get('basket');
 
-        return view('basket', ['basket'=>$pizzas]);
+        return view('basket', ['basket'=>$sessionBasket]);
     }
 
     public static function getTotalCost()
     {
-        $sessionID = Session::getId();
-        $pizzas = Basket::where('session_id', $sessionID)->get();
+        $sessionBasket = session()->get('basket');
         $totalCost = 0.00;
 
-        foreach ($pizzas as $pizza)
+        foreach ($sessionBasket as $pizza)
         {
-            $totalCost += $pizza->pizza_price;
+            $totalCost += $pizza['price'];
         }
 
         return $totalCost;
     }
 
-    public function removeFromBasket(Basket $basket)
+    public function removeFromBasket($id)
     {
-        $basket->delete();
+        $basket = session()->get('basket');
+        if (isset($basket[$id]))
+        {
+            unset($basket[$id]);
+            session()->put('basket', $basket);
+        }
+
+        session()->flash('success', 'Pizza successfully removed');
 
         return redirect('basket');
     }
