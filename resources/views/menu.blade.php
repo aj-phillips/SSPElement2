@@ -124,25 +124,26 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title text-center">Create Your Own</h5>
-                                        <label for="cyoPizzaSize">Pizza Size:</label>
-                                        <select id="cyoPizzaSize" class="form-select" aria-label="Create your own pizza sizes">
-                                            <option>Pizza size</option>
-                                            <option value="small" selected>Small</option>
-                                            <option value="medium">Medium</option>
-                                            <option value="large">Large</option>
-                                        </select>
-                                        <label class="mt-3">Toppings:</label>
-                                        @foreach($t as $topping)
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="cyo{{$topping}}">
-                                                <label class="form-check-label" for="cyo{{$topping}}">
-                                                    {{ $topping }}
-                                                </label>
-                                            </div>
-                                        @endforeach
-                                        <form action="/add_to_basket" method="POST">
+                                        <form action="/add_to_basket" method="post">
                                             @csrf
+                                            <label class="mt-3">Toppings:</label>
+                                            @foreach($t as $topping)
+                                                <div class="form-check">
+                                                    <input name="cToppings[]" class="form-check-input" type="checkbox" value="{{ $topping }}">
+                                                    <label class="form-check-label" for="cToppings[]">
+                                                        {{ $topping }}
+                                                    </label>
+                                                </div>
+                                            @endforeach
+                                            <label for="cPizzaSize">Pizza Size:</label>
+                                            <select name="cPizzaSize" id="cPizzaSize" class="form-select" aria-label="Create your own pizza sizes">
+                                                <option>Pizza size</option>
+                                                <option value="Small" selected>Small</option>
+                                                <option value="Medium">Medium</option>
+                                                <option value="Large">Large</option>
+                                            </select>
                                             <input type="hidden" name="pizza_id" value="5">
+                                            <input type="hidden" name="pizza_name" value="Create Your Own">
                                             <Button class="btn btn-primary mt-3 w-100">Add Pizza</Button>
                                         </form>
                                     </div>

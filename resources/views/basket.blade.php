@@ -18,9 +18,10 @@
                         <table class="table table-striped table-sm text-center align-middle">
                             <thead>
                             <tr>
-                                <th scope="col">Pizza Name</th>
-                                <th scope="col">Pizza Size</th>
-                                <th scope="col">Pizza Price</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Toppings</th>
+                                <th scope="col">Size</th>
+                                <th scope="col">Price</th>
                                 <th scope="col">Actions</th>
                             </tr>
                             </thead>
@@ -29,6 +30,7 @@
                                 @foreach(session('basket') as $id => $pizza)
                                     <tr>
                                         <td>{{ $pizza['name'] }}</td>
+                                        <td>{{ $pizza['description'] }}</td>
                                         <td>{{ $pizza['size'] }}</td>
                                         <td>£{{ number_format($pizza['price'], 2) }}</td>
                                         <td><a href="/basket/delete/{{ $pizza['pizza_id'] }}" class="btn btn-danger">Remove</a></td>
