@@ -40,7 +40,15 @@ class MenuController extends Controller
         $pizza = new Pizza();
         $basket = session()->get('basket');
         $sizeSelection = null;
-        $id = count($basket) + 1;
+
+        if ($basket == null)
+        {
+            $id = 1;
+        }
+        else
+        {
+            $id = count($basket) + 1;
+        }
 
         // Prices for pizza based on size
         $smallPrice = 0;
@@ -86,7 +94,7 @@ class MenuController extends Controller
 
                     $pizza->price = $pizzaCost;
                     break;
-                case "Larger":
+                case "Large":
                     $largePrice = 11.00;
                     $amountOfToppings = count($selectedToppings);
                     $pizzaCost = (1.15 * $amountOfToppings + $largePrice);
@@ -151,6 +159,7 @@ class MenuController extends Controller
         {
             $basket = [
                 $id => [
+                    "id" => $id,
                     "pizza_id" => $request->pizza_id,
                     "name" => $pizza->name,
                     "description" => $pizza->description,
@@ -163,6 +172,7 @@ class MenuController extends Controller
         }
 
         $basket[$id] = [
+            "id" => $id,
             "pizza_id" => $request->pizza_id,
             "name" => $pizza->name,
             "description" => $pizza->description,

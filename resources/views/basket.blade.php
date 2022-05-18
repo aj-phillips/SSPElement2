@@ -30,13 +30,13 @@
                                     </thead>
                                     <tbody>
                                     @if (session('basket'))
-                                        @foreach(session('basket') as $id => $pizza)
+                                        @foreach(session('basket') as $basket => $pizza)
                                             <tr>
                                                 <td>{{ $pizza['name'] }}</td>
                                                 <td>{{ $pizza['description'] }}</td>
                                                 <td>{{ $pizza['size'] }}</td>
                                                 <td>£{{ number_format($pizza['price'], 2) }}</td>
-                                                <td><a href="/basket/delete/{{ $pizza['pizza_id'] }}" class="btn btn-danger">Remove</a></td>
+                                                <td><a href="/basket/delete/{{ $pizza['id'] }}" class="btn btn-danger">Remove</a></td>
                                             </tr>
                                         @endforeach
                                     @endif
