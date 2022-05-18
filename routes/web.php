@@ -28,7 +28,3 @@ Route::post('/add_to_basket', [\App\Http\Controllers\MenuController::class, 'add
 Route::get('/basket/delete/{id}', [\App\Http\Controllers\MenuController::class, 'removeFromBasket'])->name('removeFromBasket');
 
 Auth::routes();
-
-Route::group(['middleware' => 'auth'], function(){
-    Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'index'])->name('admin');
-});

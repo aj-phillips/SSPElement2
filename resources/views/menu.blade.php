@@ -126,7 +126,7 @@
                                         <h5 class="card-title text-center">Create Your Own</h5>
                                         <form action="/add_to_basket" method="post">
                                             @csrf
-                                            <label class="mt-3">Toppings:</label>
+                                            <label class="mt-2">Toppings:</label>
                                             @foreach($t as $topping)
                                                 <div class="form-check">
                                                     <input name="cToppings[]" class="form-check-input" type="checkbox" value="{{ $topping }}">
@@ -135,7 +135,7 @@
                                                     </label>
                                                 </div>
                                             @endforeach
-                                            <label for="cPizzaSize">Pizza Size:</label>
+                                            <label for="cPizzaSize" class="mt-3">Pizza Size:</label>
                                             <select name="cPizzaSize" id="cPizzaSize" class="form-select" aria-label="Create your own pizza sizes">
                                                 <option>Pizza size</option>
                                                 <option value="Small" selected>Small</option>

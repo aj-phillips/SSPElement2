@@ -16,9 +16,6 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->string('deal_name');
-            $table->unsignedBigInteger('pizza_id');
             $table->string('pizza_name');
             $table->string('pizza_size');
             $table->decimal('pizza_price');
@@ -27,6 +24,7 @@ return new class extends Migration
 
             // Foreign keys
             $table->index('user_id');
+            $table->index('pizza_id');
         });
     }
 

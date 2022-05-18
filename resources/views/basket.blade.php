@@ -14,32 +14,36 @@
                         </div>
                     @endif
 
-                    <div class="table-responsive pt-2">
-                        <table class="table table-striped table-sm text-center align-middle">
-                            <thead>
-                            <tr>
-                                <th scope="col">Name</th>
-                                <th scope="col">Toppings</th>
-                                <th scope="col">Size</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Actions</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @if (session('basket'))
-                                @foreach(session('basket') as $id => $pizza)
+                    @if (!session('basket'))
+                        <p class="text-center">Nothing in your basket!</p>
+                        @else
+                            <div class="table-responsive pt-2">
+                                <table class="table table-striped table-sm text-center align-middle">
+                                    <thead>
                                     <tr>
-                                        <td>{{ $pizza['name'] }}</td>
-                                        <td>{{ $pizza['description'] }}</td>
-                                        <td>{{ $pizza['size'] }}</td>
-                                        <td>£{{ number_format($pizza['price'], 2) }}</td>
-                                        <td><a href="/basket/delete/{{ $pizza['pizza_id'] }}" class="btn btn-danger">Remove</a></td>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Toppings</th>
+                                        <th scope="col">Size</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Actions</th>
                                     </tr>
-                                @endforeach
-                            @endif
-                            </tbody>
-                        </table>
-                    </div>
+                                    </thead>
+                                    <tbody>
+                                    @if (session('basket'))
+                                        @foreach(session('basket') as $id => $pizza)
+                                            <tr>
+                                                <td>{{ $pizza['name'] }}</td>
+                                                <td>{{ $pizza['description'] }}</td>
+                                                <td>{{ $pizza['size'] }}</td>
+                                                <td>£{{ number_format($pizza['price'], 2) }}</td>
+                                                <td><a href="/basket/delete/{{ $pizza['pizza_id'] }}" class="btn btn-danger">Remove</a></td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
+                                    </tbody>
+                                </table>
+                            </div>
+                    @endif
                 </div>
             </div>
         </div>

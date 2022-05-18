@@ -18,10 +18,8 @@ return new class extends Migration
             $table->string('username')->unique();
             $table->string('password');
             $table->string('email')->unique();
-            $table->string('url')->nullable();
             $table->date('dob');
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('usertype')->default('USER')->comment("USER for user and ADMIN for admin");
             $table->rememberToken();
             $table->timestamps();
         });
