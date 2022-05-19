@@ -54,26 +54,31 @@
                 <div class="card-header text-center">{{ __('Summary') }}</div>
 
                 <div class="mt-3 ms-3">
-                    <label for="getOrderTypes">Collection/Delivery</label>
-                    <select id="getOrderTypes" class="form-select w-25" aria-label="Order retrieval type">
-                        <option selected>...</option>
-                        <option value="collection">Collection</option>
-                        <option value="delivery">Delivery</option>
-                    </select>
+                    <p>Selected Deals: Placeholder - put deals here</p>
                 </div>
 
-                <?php
-                    use App\Http\Controllers\MenuController;
-                    $totalCost = MenuController::getTotalCost();
-                ?>
+                <form action="/orders/create" method="post">
+                    @csrf
+                    <div class="mt-2 ms-3">
+                        <label for="getOrderType">Collection/Delivery</label>
+                        <select name="getOrderType" id="getOrderType" class="form-select w-25" aria-label="Order retrieval type">
+                            <option selected>...</option>
+                            <option value="Collection">Collection</option>
+                            <option value="Delivery">Delivery</option>
+                        </select>
+                    </div>
 
-                <h3 class="mt-4 ms-3">Total Cost: £{{ number_format($totalCost, 2) }}</h3>
+                    <?php
+                        use App\Http\Controllers\MenuController;
+                        $totalCost = MenuController::getTotalCost();
+                    ?>
 
-                <div class="text-center mb-3 mt-3">
-                    <form action="">
+                    <h4 class="mt-4 ms-3">Total Cost: £{{ number_format($totalCost, 2) }}</h4>
+
+                    <div class="text-center mb-3 mt-3">
                         <Button class="btn btn-primary w-75">Confirm Order</Button>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

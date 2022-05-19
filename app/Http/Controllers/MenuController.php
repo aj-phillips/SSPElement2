@@ -47,7 +47,8 @@ class MenuController extends Controller
         }
         else
         {
-            $id = count($basket) + 1;
+            $lastPizza = end($basket);
+            $id = $lastPizza['id'] + 1;
         }
 
         // Prices for pizza based on size
@@ -203,7 +204,12 @@ class MenuController extends Controller
     {
         $sessionBasket = session()->get('basket');
 
-        return view('basket', ['basket'=>$sessionBasket]);
+        if ($sessionBasket)
+        {
+            return view('basket', ['basket'=>$sessionBasket]);
+        }
+
+        return view('basket');
     }
 
     public static function getTotalCost()
@@ -211,7 +217,7 @@ class MenuController extends Controller
         $sessionBasket = session()->get('basket');
         $totalCost = 0.00;
 
-        foreach ($sessionBasket as $pizza)
+        foreach ((array) $sessionBasket as $pizza)
         {
             $totalCost += $pizza['price'];
         }

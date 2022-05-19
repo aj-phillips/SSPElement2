@@ -56,20 +56,6 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="url" class="col-md-4 col-form-label text-md-end">Webpage URL:</label>
-
-                                <div class="col-md-6">
-                                    <input id="url" type="url" class="form-control @error('url') is-invalid @enderror" name="url" value="{{ old('url') }}" autocomplete="url">
-
-                                    @error('url')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
                                 <label for="dob" class="col-md-4 col-form-label text-md-end">Date of Birth:</label>
 
                                 <div class="col-md-6">

@@ -43,15 +43,6 @@
                     <ul class="navbar-nav me-auto ms-3">
                         <a href="{{ route('menu') }}" class="dropdown-item {{ Route::currentRouteNamed( 'menu' ) ?  'active' : '' }}">Menu</a>
                         <a href="{{ route('orders') }}" class="dropdown-item {{ Route::currentRouteNamed( 'orders' ) ?  'active' : '' }}">Orders</a>
-                        @if(Route::has('login'))
-                            @auth
-                                @if (Auth::user()->usertype == "ADMIN")
-                                    <a href="{{ route('admin') }}" class="dropdown-item {{ Route::currentRouteNamed( 'admin' ) ?  'active' : '' }}">Admin</a>
-                                @endif
-                            @else
-
-                            @endif
-                        @endif
                     </ul>
 
                     <!-- Center of navbar -->
@@ -95,6 +86,9 @@
                                         @csrf
                                     </form>
                                 </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('basket') }}">Basket ({{ $total }})</a>
                             </li>
                         @endguest
                     </ul>

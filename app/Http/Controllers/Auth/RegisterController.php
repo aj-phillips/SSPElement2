@@ -56,7 +56,6 @@ class RegisterController extends Controller
             'username' => ['required', 'string', 'max:20', 'unique:users'],
             'password' => ['required', 'string', 'min:5', 'max:20'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'url' => [new ValidateURL(), 'max:255'],
             'dob' => ['required', 'date', new DobAgeCheck(18), 'before:today'],
         ]);
     }
@@ -73,7 +72,6 @@ class RegisterController extends Controller
             'username' => $data['username'],
             'password' => Hash::make($data['password']),
             'email' => $data['email'],
-            'url' => $data['url'],
             'dob' => $data['dob'],
         ]);
     }

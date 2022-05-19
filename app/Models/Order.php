@@ -9,19 +9,6 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'username',
-        'password',
-        'email',
-        'url',
-        'dob',
-        'usertype',
-    ];
-
-    protected $casts = [
-        'date' => 'datetime',
-    ];
-
     public function user()
     {
         return $this->belongsTo(User::class);
