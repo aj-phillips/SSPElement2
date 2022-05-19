@@ -29,13 +29,16 @@ class ViewOrderController extends Controller
 
     }
 
-    public function viewOrder(Order $order, OrderDetails $orderDetails)
+    public function viewOrder($id)
     {
-        return view('vieworder', compact('order'), compact('orderDetails'));
-    }
+        $pizzas = OrderDetails::where('order_id', $id)->get();
+        $pizza1 = $pizzas->first();
 
-    public function viewLocalOrder()
-    {
+//        if ($pizza1->user_id != Auth::id())
+//        {
+//            return redirect('orders');
+//        }
 
+        return view('vieworder', compact('pizzas'))->with('order_id', $id);
     }
 }

@@ -9,13 +9,10 @@ class Order extends Model
 {
     use HasFactory;
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function pizzas()
-    {
-        return $this->hasMany(Pizza::class);
-    }
+    protected $fillable = [
+        'user_id',
+        'type',
+        'total',
+        'status',
+    ];
 }

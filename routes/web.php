@@ -29,8 +29,7 @@ Route::get('/basket/delete/{id}', [\App\Http\Controllers\MenuController::class, 
 
 Route::post('/orders/create', [\App\Http\Controllers\OrdersController::class, 'createOrder'])->name('createOrder');
 Route::get('/orders/view/{order}', [\App\Http\Controllers\ViewOrderController::class, 'viewOrder'])->name('viewOrder');
-Route::get('/orders/viewlocal/{order}', [\App\Http\Controllers\ViewOrderController::class, 'viewOrderFromSession'])->name('viewOrderFromSession');
-Route::get('/orders/delete/{id}', [\App\Http\Controllers\OrdersController::class, 'deleteOrder'])->name('deleteOrder');
+Route::get('/orders/delete/{order}', [\App\Http\Controllers\OrdersController::class, 'deleteOrder'])->name('deleteOrder');
 Route::get('/orders/deletelocal/{id}', [\App\Http\Controllers\OrdersController::class, 'deleteOrderFromSession'])->name('deleteOrderFromSession');
 
 Auth::routes();

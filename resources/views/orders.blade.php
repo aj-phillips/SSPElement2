@@ -38,7 +38,6 @@
                                                 <td>{{ $order['type'] }}</td>
                                                 <td>£{{ number_format($order['total'], 2) }}</td>
                                                 <td>{{ $order['status'] }}</td>
-                                                <td><a href="#" class="btn btn-info w-100">View</a></td>
                                                 <td><a href="/orders/deletelocal/{{ $order['id'] }}" class="btn btn-danger w-100">Remove</a></td>
                                             </tr>
                                         @endforeach
@@ -48,19 +47,22 @@
                             </div>
                         @endif
                     @else
-                        <div class="table-responsive pt-2 mt-3">
-                            <table class="table table-striped table-sm text-center align-middle">
-                                <thead>
-                                <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Collection/Delivery</th>
-                                    <th scope="col">Total</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col" colspan="2">Actions</th>
-                                </tr>
-                                </thead>
-                                <tbody>
+                        @if(count($orders) == 0 or $orders == null)
+                            <p class="text-center">Nothing in your order history!</p>
+                        @else
+                            <div class="table-responsive pt-2 mt-3">
+                                <table class="table table-striped table-sm text-center align-middle">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Collection/Delivery</th>
+                                        <th scope="col">Total</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col" colspan="2">Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
                                     @foreach($orders as $order)
                                         <tr>
                                             <td>{{ $order->id }}</td>
@@ -72,9 +74,10 @@
                                             <td><a href="/orders/delete/{{ $order->id }}" class="btn btn-danger w-100">Remove</a></td>
                                         </tr>
                                     @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                                    </tbody>
+                                </table>
+                            </div>
+                        @endif
                     @endif
                 </div>
             </div>

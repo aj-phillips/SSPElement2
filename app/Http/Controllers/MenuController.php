@@ -27,6 +27,7 @@ class MenuController extends Controller
      */
     public function index()
     {
+        //Session()->flush();
         $pizzaData = Pizza::all();
         $toppings = ["Cheese", "Tomato sauce", "Pepperoni", "Ham", "Chicken", "Minced beef", "Onions", "Green peppers",
             "Mushrooms", "Sweetcorn", "Jalapeno peppers", "Pineapple", "Sausage", "Bacon"];

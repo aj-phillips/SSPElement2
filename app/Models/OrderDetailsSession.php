@@ -5,15 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pizza extends Model
+class OrderDetailsSession extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'description',
-        'size',
-        'toppings',
-        'price',
+        'order_id',
+        'pizza_name',
+        'pizza_size',
+        'pizza_price',
     ];
 }
