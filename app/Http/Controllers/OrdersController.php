@@ -87,6 +87,20 @@ class OrdersController extends Controller
         $basketSession = session()->get('basket');
         $ordersSession = session()->get('orders');
         $orderType = $request->getOrderType;
+        $selectedDeal = MenuController::getSelectedDeal();
+
+        switch ($selectedDeal)
+        {
+            case "Two Large":
+            case "Two Medium":
+            case "Two Small":
+            case "Family Feast":
+                if($orderType != "Collection")
+                {
+                    return redirect('basket')->with('error_code', 1)->with('error_message', $orderType . " isn't available with this deal!");
+                }
+                break;
+        }
 
         // If user is not logged in, save the order to the local session storage
         if (!Auth::check())
@@ -177,12 +191,14 @@ class OrdersController extends Controller
             Session::forget('basket');
         }
 
+        Session::forget('selected_deals');
         return redirect('orders');
     }
 
     public function deleteOrder(Order $order)
     {
         $order->delete();
+        OrderDetails::where('order_id', '=', $order->id)->delete();
 
         return redirect('orders');
     }

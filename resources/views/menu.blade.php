@@ -26,61 +26,119 @@
                             <div class="col-sm-6">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title text-center">Buy One Get One Free</h5>
-                                        <p class="card-text text-center">Buy two medium or large pizzas and get one free!</p>
-                                        <a href="#" class="btn btn-primary w-100">Select Deal</a>
+                                        <form action="/add_deal_to_basket" method="post">
+                                            @csrf
+                                            <h5 class="card-title text-center">Buy One Get One Free</h5>
+                                            <p class="card-text text-center">Buy two medium or large pizzas and get one free!</p>
+                                            <input type="hidden" name="deal_name" id="deal_name" value="Buy One Get One Free">
+                                            <input type="hidden" name="deal_price" id="deal_price" value="0">
+                                                @if(\App\Http\Controllers\MenuController::getSelectedDeal() == "Buy One Get One Free")
+                                                    <Button class="btn btn-primary w-100" disabled>Deal Selected</Button>
+                                                @else
+                                                    <Button class="btn btn-primary w-100">Select Deal</Button>
+                                                @endif
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title text-center">Three For Two</h5>
-                                        <p class="card-text text-center">Buy three medium pizzas for the price of two!</p>
-                                        <a href="#" class="btn btn-primary w-100">Select Deal</a>
+                                        <form action="/add_deal_to_basket" method="post">
+                                            @csrf
+                                            <h5 class="card-title text-center">Three For Two</h5>
+                                            <p class="card-text text-center">Buy three medium pizzas for the price of two!</p>
+                                            <input type="hidden" name="deal_name" id="deal_name" value="Three For Two">
+                                            <input type="hidden" name="deal_price" id="deal_price" value="0">
+                                            @if(\App\Http\Controllers\MenuController::getSelectedDeal() == "Three For Two")
+                                                <Button class="btn btn-primary w-100" disabled>Deal Selected</Button>
+                                            @else
+                                                <Button class="btn btn-primary w-100">Select Deal</Button>
+                                            @endif
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6 mt-3">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title text-center">Family Feast</h5>
-                                        <p class="card-text text-center">Buy any four medium pizzas for the family to enjoy!</p>
-                                        <p class="card-text text-center">Price: £30</p>
-                                        <a href="#" class="btn btn-primary w-100">Select Deal</a>
+                                        <form action="/add_deal_to_basket" method="post">
+                                            @csrf
+                                            <h5 class="card-title text-center">Family Feast</h5>
+                                            <p class="card-text text-center">Buy any four medium pizzas for the family to enjoy!</p>
+                                            <p class="card-text text-center">Price: £30</p>
+                                            <input type="hidden" name="deal_name" id="deal_name" value="Family Feast">
+                                            <input type="hidden" name="deal_price" id="deal_price" value="30.00">
+                                            @if(\App\Http\Controllers\MenuController::getSelectedDeal() == "Family Feast")
+                                                <Button class="btn btn-primary w-100" disabled>Deal Selected</Button>
+                                            @else
+                                                <Button class="btn btn-primary w-100">Select Deal</Button>
+                                            @endif
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6 mt-3">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title text-center">Two Large</h5>
-                                        <p class="card-text text-center">Buy any two large pizzas and have a night indoors!</p>
-                                        <p class="card-text text-center">Price: £25</p>
-                                        <a href="#" class="btn btn-primary w-100">Select Deal</a>
+                                        <form action="/add_deal_to_basket" method="post">
+                                            @csrf
+                                            <h5 class="card-title text-center">Two Large</h5>
+                                            <p class="card-text text-center">Buy any two large pizzas and have a night indoors!</p>
+                                            <p class="card-text text-center">Price: £25</p>
+                                            <input type="hidden" name="deal_name" id="deal_name" value="Two Large">
+                                            <input type="hidden" name="deal_price" id="deal_price" value="25.00">
+                                            @if(\App\Http\Controllers\MenuController::getSelectedDeal() == "Two Large")
+                                                <Button class="btn btn-primary w-100" disabled>Deal Selected</Button>
+                                            @else
+                                                <Button class="btn btn-primary w-100">Select Deal</Button>
+                                            @endif
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6 mt-3">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title text-center">Two Medium</h5>
-                                        <p class="card-text text-center">Buy any two medium pizzas for the missus to enjoy!</p>
-                                        <p class="card-text text-center">Price: £18</p>
-                                        <a href="#" class="btn btn-primary w-100">Select Deal</a>
+                                        <form action="/add_deal_to_basket" method="post">
+                                            @csrf
+                                            <h5 class="card-title text-center">Two Medium</h5>
+                                            <p class="card-text text-center">Buy any two medium pizzas for the missus to enjoy!</p>
+                                            <p class="card-text text-center">Price: £18</p>
+                                            <input type="hidden" name="deal_name" id="deal_name" value="Two Medium">
+                                            <input type="hidden" name="deal_price" id="deal_price" value="18.00">
+                                            @if(\App\Http\Controllers\MenuController::getSelectedDeal() == "Two Medium")
+                                                <Button class="btn btn-primary w-100" disabled>Deal Selected</Button>
+                                            @else
+                                                <Button class="btn btn-primary w-100">Select Deal</Button>
+                                            @endif
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6 mt-3">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title text-center">Two Small</h5>
-                                        <p class="card-text text-center">Buy any two small pizzas for the kids to enjoy!</p>
-                                        <p class="card-text text-center">Price: £12</p>
-                                        <a href="#" class="btn btn-primary w-100">Select Deal</a>
+                                        <form action="/add_deal_to_basket" method="post">
+                                            @csrf
+                                            <h5 class="card-title text-center">Two Small</h5>
+                                            <p class="card-text text-center">Buy any two small pizzas for the kids to enjoy!</p>
+                                            <p class="card-text text-center">Price: £12</p>
+                                            <input type="hidden" name="deal_name" id="deal_name" value="Two Small">
+                                            <input type="hidden" name="deal_price" id="deal_price" value="12.00">
+                                            @if(\App\Http\Controllers\MenuController::getSelectedDeal() == "Two Small")
+                                                <Button class="btn btn-primary w-100" disabled>Deal Selected</Button>
+                                            @else
+                                                <Button class="btn btn-primary w-100">Select Deal</Button>
+                                            @endif
+                                        </form>
                                     </div>
                                 </div>
                             </div>
+                            <form action="/cleardeals" method="post">
+                                @csrf
+                                <Button class="btn btn-danger mt-3 w-100">Clear Deals</Button>
+                            </form>
                         </div>
 
                         <!-- Pizza section -->

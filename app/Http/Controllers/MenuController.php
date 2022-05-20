@@ -34,6 +34,43 @@ class MenuController extends Controller
         return view('menu', ['pizzas'=>$pizzaData])->with('t', $toppings);
     }
 
+    public function addDealToBasket(Request $request)
+    {
+        $selectedDeals = session()->get('selected_deals');
+
+        // Check if empty and add the first item
+        $selectedDeals = [
+            1 => [
+                "id" => 1,
+                "name" => $request->deal_name,
+                "price" => $request->deal_price,
+            ]
+        ];
+
+        session()->put('selected_deals', $selectedDeals);
+
+        return redirect()->back()->with('success', 'Deal successfully added to basket!');
+    }
+
+    public static function getSelectedDeal()
+    {
+        $selectedDeals = session()->get('selected_deals');
+
+        if ($selectedDeals == null)
+        {
+            return "";
+        }
+
+        return $selectedDeals[1]['name'];
+    }
+
+    public function clearDeals()
+    {
+        Session::forget('selected_deals');
+
+        return redirect('menu');
+    }
+
     public function addToBasket(Request $request)
     {
         //session()->flush();
@@ -57,6 +94,7 @@ class MenuController extends Controller
         $mediumPrice = 0;
         $largePrice = 0;
 
+        // If the pizza name is create your own when add pizza is pressed
         if ($request->pizza_name == "Create Your Own")
         {
             // Get the pizza size
@@ -216,26 +254,138 @@ class MenuController extends Controller
     public static function getTotalCost()
     {
         $sessionBasket = session()->get('basket');
+        $selectedDeals = session()->get('selected_deals');
         $totalCost = 0.00;
 
-        foreach ((array) $sessionBasket as $pizza)
+        if ($selectedDeals == null)
         {
-            $totalCost += $pizza['price'];
+            foreach ((array) $sessionBasket as $pizza)
+            {
+                $totalCost += $pizza['price'];
+            }
+        }
+        else
+        {
+            switch ($selectedDeals[1]['name'])
+            {
+                case "Buy One Get One Free":
+                    break;
+                case "Three For Two":
+                    break;
+                case "Family Feast":
+                    if (count($sessionBasket) == 4)
+                    {
+                        if ($sessionBasket[1]['size'] == "Medium" and $sessionBasket[2]['size'] == "Medium" and $sessionBasket[3]['size'] == "Medium" and $sessionBasket[4]['size'] == "Medium")
+                        {
+                            if ($sessionBasket[1]['name'] != "Create Your Own" or $sessionBasket[2] != "Create Your Own" and $sessionBasket[3]['name'] != "Create Your Own" or $sessionBasket[4] != "Create Your Own")
+                            {
+                                $totalCost = 30.00;
+                            }
+                        }
+                        else
+                        {
+                            foreach ((array) $sessionBasket as $pizza)
+                            {
+                                $totalCost += $pizza['price'];
+                            }
+                        }
+                    }
+                    else
+                    {
+                        foreach ((array) $sessionBasket as $pizza)
+                        {
+                            $totalCost += $pizza['price'];
+                        }
+                    }
+                    break;
+                case "Two Large":
+                    if (count($sessionBasket) == 2)
+                    {
+                        if ($sessionBasket[1]['size'] == "Large" and $sessionBasket[2]['size'] == "Large")
+                        {
+                            if ($sessionBasket[1]['name'] != "Create Your Own" or $sessionBasket[2] != "Create Your Own")
+                            {
+                                $totalCost = 25.00;
+                            }
+                        }
+                        else
+                        {
+                            foreach ((array) $sessionBasket as $pizza)
+                            {
+                                $totalCost += $pizza['price'];
+                            }
+                        }
+                    }
+                    else
+                    {
+                        foreach ((array) $sessionBasket as $pizza)
+                        {
+                            $totalCost += $pizza['price'];
+                        }
+                    }
+                    break;
+                case "Two Medium":
+                    if (count($sessionBasket) == 2)
+                    {
+                        if ($sessionBasket[1]['size'] == "Medium" and $sessionBasket[2]['size'] == "Medium")
+                        {
+                            if ($sessionBasket[1]['name'] != "Create Your Own" or $sessionBasket[2] != "Create Your Own")
+                            {
+                                $totalCost = 18.00;
+                            }
+                        }
+                        else
+                        {
+                            foreach ((array) $sessionBasket as $pizza)
+                            {
+                                $totalCost += $pizza['price'];
+                            }
+                        }
+                    }
+                    else
+                    {
+                        foreach ((array) $sessionBasket as $pizza)
+                        {
+                            $totalCost += $pizza['price'];
+                        }
+                    }
+                    break;
+                case "Two Small":
+                    if (count($sessionBasket) == 2)
+                    {
+                        if ($sessionBasket[1]['size'] == "Small" and $sessionBasket[2]['size'] == "Small")
+                        {
+                            if ($sessionBasket[1]['name'] != "Create Your Own" or $sessionBasket[2] != "Create Your Own")
+                            {
+                                $totalCost = 12.00;
+                            }
+                        }
+                        else
+                        {
+                            foreach ((array) $sessionBasket as $pizza)
+                            {
+                                $totalCost += $pizza['price'];
+                            }
+                        }
+                    }
+                    else
+                    {
+                        foreach ((array) $sessionBasket as $pizza)
+                        {
+                            $totalCost += $pizza['price'];
+                        }
+                    }
+                    break;
+            }
         }
 
         return $totalCost;
     }
 
-    public function removeFromBasket($id)
+    public function removeAllFromBasket()
     {
-        $basket = session()->get('basket');
-        if (isset($basket[$id]))
-        {
-            unset($basket[$id]);
-            session()->put('basket', $basket);
-        }
-
-        session()->flash('success', 'Pizza successfully removed');
+        Session::forget('basket');
+        Session::forget('selected_deals');
 
         return redirect('basket');
     }
