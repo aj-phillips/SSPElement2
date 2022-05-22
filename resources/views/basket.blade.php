@@ -72,7 +72,7 @@
 
                 <form action="/orders/create" method="post">
                     @csrf
-                    <div class="mt-2 ms-3">
+                    <div class="mt-1 ms-3">
                         <label for="getOrderType">Collection/Delivery</label>
                         <select name="getOrderType" id="getOrderType" class="form-select w-25" aria-label="Order retrieval type">
                             <option selected>...</option>
