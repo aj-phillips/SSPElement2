@@ -22,12 +22,12 @@ Route::get('/', function () {
 
 Route::get('/menu', [\App\Http\Controllers\MenuController::class, 'index'])->name('menu');
 Route::get('/orders', [\App\Http\Controllers\OrdersController::class, 'index'])->name('orders');
-Route::get('/basket', [\App\Http\Controllers\MenuController::class, 'basketList'])->name('basket');
+Route::get('/basket', [\App\Http\Controllers\BasketController::class, 'showBasket'])->name('basket');
 
-Route::post('/add_to_basket', [\App\Http\Controllers\MenuController::class, 'addToBasket'])->name('addToBasket');
-Route::post('/add_deal_to_basket', [\App\Http\Controllers\MenuController::class, 'addDealToBasket'])->name('addDealToBasket');
-Route::post('/cleardeals', [\App\Http\Controllers\MenuController::class, 'clearDeals'])->name('clearDeals');
-Route::post('/basket/clear', [\App\Http\Controllers\MenuController::class, 'removeAllFromBasket'])->name('removeAllFromBasket');
+Route::post('/basket/deal/add', [\App\Http\Controllers\BasketController::class, 'addDealToBasket'])->name('addDealToBasket');
+Route::post('/basket/deal/clear', [\App\Http\Controllers\BasketController::class, 'clearDeals'])->name('clearDeals');
+Route::post('/basket/add', [\App\Http\Controllers\BasketController::class, 'addToBasket'])->name('addToBasket');
+Route::post('/basket/clear', [\App\Http\Controllers\BasketController::class, 'removeAllFromBasket'])->name('removeAllFromBasket');
 
 Route::post('/orders/create', [\App\Http\Controllers\OrdersController::class, 'createOrder'])->name('createOrder');
 Route::get('/orders/view/{order}', [\App\Http\Controllers\ViewOrderController::class, 'viewOrder'])->name('viewOrder');

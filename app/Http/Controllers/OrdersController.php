@@ -132,7 +132,7 @@ class OrdersController extends Controller
                     $oID => [
                         "id" => $oID,
                         "type" => $orderType,
-                        "total" => MenuController::getTotalCost(),
+                        "total" => BasketController::getTotalCost(),
                         "status" => "Created"
                     ]
                 ];
@@ -142,7 +142,7 @@ class OrdersController extends Controller
                 $ordersSession[$oID] = [
                     "id" => $oID,
                     "type" => $orderType,
-                    "total" => MenuController::getTotalCost(),
+                    "total" => BasketController::getTotalCost(),
                     "status" => "Created"
                 ];
             }
@@ -170,7 +170,7 @@ class OrdersController extends Controller
         {
             $order->user_id = Auth::id();
             $order->type = $orderType;
-            $order->total = MenuController::getTotalCost();
+            $order->total = BasketController::getTotalCost();
             $order->status = "Processed";
 
             $order->save();

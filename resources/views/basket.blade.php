@@ -56,8 +56,9 @@
                 <div class="card-header text-center">{{ __('Summary') }}</div>
 
                 <?php
+                    use App\Http\Controllers\BasketController;
                     use App\Http\Controllers\MenuController;
-                    $totalCost = MenuController::getTotalCost();
+                    $totalCost = BasketController::getTotalCost();
                     $selectedDeal = MenuController::getSelectedDeal();
                 ?>
 
@@ -88,7 +89,11 @@
                     <h4 class="mt-4 ms-3">Total Cost: £{{ number_format($totalCost, 2) }}</h4>
 
                     <div class="text-center mb-3 mt-3">
-                        <Button class="btn btn-primary w-75">Confirm Order</Button>
+                        @if (!session('basket'))
+                            <Button class="btn btn-primary w-75" disabled>Confirm Order</Button>
+                        @else
+                            <Button class="btn btn-primary w-75">Confirm Order</Button>
+                        @endif
                     </div>
                 </form>
             </div>

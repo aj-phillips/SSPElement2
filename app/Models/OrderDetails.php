@@ -15,4 +15,9 @@ class OrderDetails extends Model
         'pizza_size',
         'pizza_price',
     ];
+
+    public function orders()
+    {
+        return $this->belongsTo(Order::class);
+    }
 }

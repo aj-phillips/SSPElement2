@@ -15,4 +15,9 @@ class Order extends Model
         'total',
         'status',
     ];
+
+    public function orderdetails()
+    {
+        return $this->hasOne(OrderDetails::class);
+    }
 }

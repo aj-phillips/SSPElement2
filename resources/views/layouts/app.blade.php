@@ -25,8 +25,8 @@
 </head>
 <body>
     <?php
-        use App\Http\Controllers\MenuController;
-        $total = MenuController::basketItem();
+        use App\Http\Controllers\BasketController;
+        $total = BasketController::getBasketCount();
     ?>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">

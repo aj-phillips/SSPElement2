@@ -26,7 +26,7 @@
                             <div class="col-sm-6">
                                 <div class="card">
                                     <div class="card-body">
-                                        <form action="/add_deal_to_basket" method="post">
+                                        <form action="/basket/deal/add" method="post">
                                             @csrf
                                             <h5 class="card-title text-center">Buy One Get One Free</h5>
                                             <p class="card-text text-center">Buy two medium or large pizzas and get one free!</p>
@@ -44,7 +44,7 @@
                             <div class="col-sm-6">
                                 <div class="card">
                                     <div class="card-body">
-                                        <form action="/add_deal_to_basket" method="post">
+                                        <form action="/basket/deal/add" method="post">
                                             @csrf
                                             <h5 class="card-title text-center">Three For Two</h5>
                                             <p class="card-text text-center">Buy three medium pizzas for the price of two!</p>
@@ -62,7 +62,7 @@
                             <div class="col-sm-6 mt-3">
                                 <div class="card">
                                     <div class="card-body">
-                                        <form action="/add_deal_to_basket" method="post">
+                                        <form action="/basket/deal/add" method="post">
                                             @csrf
                                             <h5 class="card-title text-center">Family Feast</h5>
                                             <p class="card-text text-center">Buy any four medium pizzas for the family to enjoy!</p>
@@ -81,7 +81,7 @@
                             <div class="col-sm-6 mt-3">
                                 <div class="card">
                                     <div class="card-body">
-                                        <form action="/add_deal_to_basket" method="post">
+                                        <form action="/basket/deal/add" method="post">
                                             @csrf
                                             <h5 class="card-title text-center">Two Large</h5>
                                             <p class="card-text text-center">Buy any two large pizzas and have a night indoors!</p>
@@ -100,7 +100,7 @@
                             <div class="col-sm-6 mt-3">
                                 <div class="card">
                                     <div class="card-body">
-                                        <form action="/add_deal_to_basket" method="post">
+                                        <form action="/basket/deal/add" method="post">
                                             @csrf
                                             <h5 class="card-title text-center">Two Medium</h5>
                                             <p class="card-text text-center">Buy any two medium pizzas for the missus to enjoy!</p>
@@ -119,7 +119,7 @@
                             <div class="col-sm-6 mt-3">
                                 <div class="card">
                                     <div class="card-body">
-                                        <form action="/add_deal_to_basket" method="post">
+                                        <form action="/basket/deal/add" method="post">
                                             @csrf
                                             <h5 class="card-title text-center">Two Small</h5>
                                             <p class="card-text text-center">Buy any two small pizzas for the kids to enjoy!</p>
@@ -135,7 +135,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <form action="/cleardeals" method="post">
+                            <form action="/basket/deal/clear" method="post">
                                 @csrf
                                 <Button class="btn btn-danger mt-3 w-100">Clear Deals</Button>
                             </form>
@@ -158,7 +158,7 @@
                                             <h5 class="card-title text-center">{{ $pizza->name }}</h5>
                                             <label class="mt-2">Toppings:</label>
                                             <p class="card-text">{{ $pizza->description }}</p>
-                                            <form action="/add_to_basket" method="post">
+                                            <form action="/basket/add" method="post">
                                                 @csrf
                                                 <label for="{{ substr($pizza->name, 0, 1) }}PizzaSize">Pizza Size:</label>
                                                 <select name="{{ substr($pizza->name, 0, 1) }}PizzaSize" id="{{ substr($pizza->name, 0, 1) }}PizzaSize" class="form-select" aria-label="{{ $pizza->name }} pizza sizes">
@@ -182,7 +182,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title text-center">Create Your Own</h5>
-                                        <form action="/add_to_basket" method="post">
+                                        <form action="/basket/add" method="post">
                                             @csrf
                                             <label class="mt-2">Toppings:</label>
                                             @foreach($t as $topping)
